@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        {{msg2}}
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+/* 
+1、所有需要在界面上展示的数据应该都要在data中定义一遍，如msg2没有定义直接使用调整就会报错，但因为是vue是数据驱动，因此，
+刚开始页面渲染，没有拿到msg2的值，但过了几秒，msg2有值了添加到了data里(这里根据vue配置对象中的this一般都指向vue实例化出来的对象)，也会渲染到页面上，但是会报错。
+2、在使用Vue开发过程中，我们所有的编码一般情况下，不会写在配置对象外部；如果写定时器或者异步操作等，
+需要在配置对象的生命周期mounted()中写
+3、事件对应的回调函数应该注册在配置对象的methods属性中。
+ */
+   let vm = new Vue({
+       el:'#app',
+       data:{
+           msg:'这是一段文字',
+        //    msg2:''
+       },
+       //基本上在vue配置对象中的所有函数  他们this都指向中vue实例化出来的对象
+       //mounted生命周期，就是页面将要挂载时，它是在vue整个初始化当中肯定会被调用的一个函数
+       mounted(){
+        setTimeout(()=>{
+            console.log(this)
+            this.msg='我换了一段文字'
+            this.msg2='我换了一段文字啊啊啊'
+        },3000) 
+       },
+   })
+</script>

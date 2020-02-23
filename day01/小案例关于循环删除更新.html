@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <ul>
+            <li v-for="(item,index) in objectArray">{{index}}--{{item.name}}--{{item.age}}--{{item.config}} -- <button @click="del(index)">del</button>--<button @click="update(index)">update</button></li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    var vm = new Vue({//vm:vm层
+        el: '#app',
+        //modle层
+        data: {
+            objectArray: [
+                {
+                    name: '张三',
+                    age: 14,
+                    config:'张三啊',
+                },
+                {
+                    name: '李四',
+                    age: 16,
+                    config:'李四啊',
+                },
+                {
+                    name: '王五',
+                    age: 8,
+                    config:'王五啊',
+                },
+            ],
+            
+        },
+        methods:{
+            del(index){
+                // console.log(index)
+                this.objectArray.splice(index, 1)//从第0个开始，删除1个
+            },
+            update(index){
+                /* 
+                如果只写到这儿，由于js的限制，vue中不能直接通过index去修改数组中的数据，
+                虽然数据修改了，但界面得不到更新，我们应该使用数组的变异方法，才能有效的更新页面
+                */
+                // console.log(index);
+                // this.objectArray[index]={
+                //     name:'哈哈',
+                //     age:3,
+                //     wife:'lala'
+                // }｛
+
+                //实现数组的CUD  应该先删除需要更新的那条数据，再添加进去
+                this.objectArray.splice(index,1,{
+                    name:'哈哈',
+                    age:3,
+                    config:'哈哈啊啊'
+                })
+            }
+        }
+
+    })
+
+</script>

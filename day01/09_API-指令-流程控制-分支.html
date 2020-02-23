@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- if...else if.....esle -->
+        <span v-if='flag' v-text='msg2'></span>
+        <span v-else-if='flag' v-text='msg1'></span>
+        <span v-else v-text='msg3'></span>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+           flag:0,
+           msg1:'爱上张无忌',
+           msg2:'他的心宽容似海',
+           msg3:'你要他身边，再没别的女孩'
+       }
+   })
+</script>

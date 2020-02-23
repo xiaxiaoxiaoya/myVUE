@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2 v-text='lala'></h2>
+        <input type="text" v-model='val'>
+        <button @click='AddItem'>Add</button>
+        <ul>
+            <li v-for='Itme in list'>{{Itme}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    new Vue({
+        el:'#app',
+        data:{
+            list:['张三','李四','王五'],
+            val:'',
+            lala:'哈哈'
+        },
+        methods: {
+            AddItem(){
+                this.list.unshift(this.val);
+                this.val='';
+            }
+        },
+    })
+</script>

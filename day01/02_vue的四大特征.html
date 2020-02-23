@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='val' placeholder="请输入姓名">
+        {{msg}}
+        <hr>
+        姓名：{{val}}
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+/* 
+1、声明式编程
+    区别于DOM编程
+2、响应式数据(数据单向流 modal--view)
+    vue data对象的所有属性都会转绑给对应的vue实例
+    data中的所有数据  都是响应式数据 数据的改变会触发界面的更新
+3、数据双向流(model--view  view--model)
+v-model 实现了数据双向 流
+4、数据驱动，可用todoList案例进行说明
+ */
+   new Vue({
+       el:'#app',
+       data:{
+           msg:'这是一段文字',
+           val:''
+       }
+   })
+</script>

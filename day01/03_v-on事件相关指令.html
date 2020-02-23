@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .wrap{
+            width: 300px;
+            height: 300px;
+            background-color: skyblue;
+        }
+        .inner{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        .eventThing{
+            width: 50px;
+            height: 50px;
+            background-color: yellowgreen;
+        }
+    </style>
+    <div id="app">
+        <button v-on:click='btnClick'>点击我吖_v-on:click点击事件</button> 
+        <hr>
+        <button @click='btnClick1'>点击我吖_@click语法糖点击事件</button>
+        <hr>
+        <div class="wrap" @mouseover='hoverWrap'>
+            <div class="inner" @mouseover.stop='hoverInner'>
+                <div class="box" @mouseover.stop='hoverBox'></div>
+            </div>
+        </div>
+        <a href="http://xiaxiaoxia.top" @click.prevent='clickA'>跳转</a>
+        <hr>
+        <!-- <input type="text" @keydown.13='handleDown'> -->
+        <!-- <input type="text" @keydown.enter='handleDown'> -->
+        <input type="text" @keydown.left='handleDown'>
+        <hr>
+        <div class="eventThing" @click='handleEvent(event)'></div>
+</body>
+    </div>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    new Vue({
+        el:'#app',
+        methods:{
+            btnClick(){
+                console.log('我是v-on:click触发的点击事件')
+            },
+            btnClick1(){
+                console.log('我是@click触发的点击事件')
+            },
+            hoverWrap(){
+                console.log('我是warap')
+            },
+            hoverInner(){
+                console.log('我是inner')
+            },
+            hoverBox(){
+                console.log('我是box')
+            },
+            clickA(){
+                console.log('我是a跳转，阻止了事件的默认行为')
+            },
+            handleDown(){
+                console.log('我是按下了enter触发的事件')
+            },
+            handleEvent(e){
+                console.log(event)
+            }
+        }
+    })
+</script>

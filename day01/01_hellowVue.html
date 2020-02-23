@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='msg'>
+        <h2>{{msg}}</h2>
+        <h2>{{msg2}}</h2>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    var vm = new Vue({//vm:vm层
+        el:'#app',
+        //modle层
+        data:{
+            msg:'我是modle层，vm是viewModal',
+            msg2:data
+        },
+        mounted() {
+            setTimeout(() => {
+                this.msg='我要改变'
+            }, 2000);
+        },
+    })
+   
+</script>

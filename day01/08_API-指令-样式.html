@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .box{
+            display: inline-block;
+            padding:5px 10px;
+            background-color: skyblue;
+        }
+        .box1{
+            color:#fff;
+            text-shadow: 2px 2px  3px slateblue;
+            font-size: 16px;
+        }
+    </style>
+    <div id="app">
+        <!-- 
+            vue 处理样式，有两种解决方法：一种是class，另一种是style,需要通过v-bind在预定义标签属性前
+            加一个v-bind，即让一个非vue指令的标签属性(预定义属性和自定义属性)将给vue管理，就可以使用vue实例对象中的值
+            1、class可以有三种数据格式：字符串、数组、对象
+            2、style只有一种数据格式：对象
+         -->
+        <!-- <div v-bind:class="className">我是class形式的样式</div> -->
+        <!-- class -->
+        <div v-bind:class="className">我是class形式的样式</div>
+        <!-- style -->
+        <div v-bind:style="style">我是class形式的样式</div>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+        //class：数据格式
+            //className:'box',
+            //className:['box','box1']
+            className:{
+                box:true,
+                box1:true
+            },
+         //style：数据格式
+            style:{
+                "color":'red',
+                "text-shadow":'2px 2px 3px gray'
+            }
+       }
+   })
+</script>

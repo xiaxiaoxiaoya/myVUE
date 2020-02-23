@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(Item,index) in personArr">{{index}}——{{Item.name}}——{{Item.age}}——{{Item.config}} <button @click='del(index)'>del</button> <button @click='update(index)'>update</button></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+           personArr:[
+            {
+                "name":"张三",
+                "age":18,
+                "config":"张三啊"
+            },
+            {
+               "name":"李四",
+               "age":12,
+               "config":"李四啊"
+           },
+           {
+               "name":"王五",
+               "age":14,
+               "config":"王五啊"
+           }
+           ]
+       },
+       methods:{
+           del (index){
+             this.personArr.splice(index,1)
+           },
+           update (index){
+            /* 写到这儿，由于js的限制，vue中不能直接通过index去修改数组中的数据，
+                虽然数据修改了，但界面得不到更新，此处应该使用数组的变异方法，才能有效更新页面
+             */
+            // this.personArr[index]={
+            //     "name":"哈",
+            //     "age":4,
+            //     "config":"哈"
+            // }
+
+            //实现数组的CUD更新，需要删除要替换更新的那条数据，再添加进去
+            this.personArr.splice(index,1,{
+                "name":"哈",
+                "age":4,
+                "config":"哈"
+            })
+           }
+       }
+   })
+</script>

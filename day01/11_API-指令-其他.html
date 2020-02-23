@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+    <!--
+        1、v-pre：
+            跳过这个元素和子元素的编译过程，通常就是说如果是静态页面不需要编译，可以在最外层
+            盒子加上v-pre，这样就不需要再进行vue解析，减少了性能消耗。而且在页面中的标签，v-pre会自动消失。
+    -->
+        <div v-pre>这就是段普通的文字啦</div>
+    <!-- 
+        2、v-cloak：
+            如果页面没有被vue解析完，不允许在界面中出现veu指令代码，与display:none一起用，当vue解析成功后，
+            v-clock会自动消失，不会出现在页面标签中。加之前将网络切换到网络慢3g即可看出来效果。
+        <style>
+            [v-cloak]{
+                display: none
+            }
+        </style>
+        
+    -->
+    <div v-cloak>
+        {{obj.name}} {{obj.name}} {{obj.name}} {{obj.name}} {{obj.name}}
+    </div>
+
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   var vm =new Vue({
+        el:"#app",
+        data:{
+            list:["吃饭","睡觉","玩晓飞","弄天禹","搞啊强","玩老刘"],
+            obj:{
+                name:"达姆",
+                age:18,
+                wife:"周冬雨",
+                son:"思聪"
+            }
+        }
+    })
+</script>

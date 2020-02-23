@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            v-text:这样解析出来的数据是带标签原样输出 ：<span style="color:pink">雨分飞,飞在天空里是我的眼泪</span>
+            v-htmlStr:解析出来的是经过处理后的内容 ：雨分飞,飞在天空里是我的眼泪
+         -->
+        <p v-text='msg'></p>
+        <h4 v-html='htmlStr'></h4>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+           msg:'山外小楼夜听雨',
+           htmlStr:'<span style="color:pink">雨分飞,飞在天空里是我的眼泪</span>'
+       }
+   })
+</script>

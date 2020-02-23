@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .wrap{
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+        border:3px solid gray
+    }
+    .middle{
+        width: 120px;
+        height: 120px;
+        background-color: #fff;
+    }
+    .inner{
+        width: 60px;
+        height: 60px;
+        background-color: yellow;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- 
+            一、
+            stop：阻止冒泡
+            prevent:取消事件默认行为
+            self:观察事件的触发元素是不是自己，和stop类似，但不能阻止冒泡
+         -->
+        <!-- <div class='wrap' @click='wrapClick'>
+            <div class="middle" @click.stop='middleClick'>
+                <div class="inner" @click.stop='innerClick'></div>
+            </div>
+        </div> -->
+        
+        <a href="http://xiaxiaoxia.top" @click.prevent='link'>跳转</a>
+
+        <div class='wrap' @click.self='wrapClick'>
+            <div class="middle" @click.self='middleClick'>
+                <div class="inner" @click.self='innerClick'></div>
+            </div>
+        </div>
+
+        <!-- 
+            二、修改符
+            {keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调
+            13｜enter(tab/delete/esc/space/up/down/left/right)
+            .once:只触发一次
+            .left:当点击鼠标左键时触发
+            .right:当点击鼠标右键时触发
+            .middle:当点击鼠标中键时触发
+
+         -->
+         <!-- <input type="text" @keydown.13='handleKeydown'> -->
+         <!-- <input type="text" @keydown.enter='handleKeydown'> -->
+         <input type="text" @keydown.left='handleKeydown'>
+         <div @click.right='mouseClick'>我是鼠标点击行为</div>
+         <div @click.middle='mouseClick'>我是鼠标点击行为</div>
+
+         <!-- 
+             参数：event
+             如果第一个参数没有被占用，那么，可以直接用evetn作为实参
+             但是，如果第一个参数被占用了，那么需要用$event
+          -->
+          <div class="gray" @click="clickGray(event)">参数</div>
+          <div class="gray" @click="clickGray(123,$event)">参数</div>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:"#app",
+       data:{
+
+       },
+       methods:{
+        innerClick (){
+          //输入函数体
+          console.log('我是最小的')
+        },
+        middleClick (){
+          //输入函数体
+          console.log('我是中间的')
+        },
+        wrapClick (){
+          //输入函数体
+          console.log('我是最外边的')
+        },
+        link (){
+         alert("我是阻止默认行为")
+        },
+        handleKeydown (){
+          console.log("我是keydown行为")
+        },
+        mouseClick (){
+          console.log("我是鼠标点击行为")
+        },
+        clickGray (a,e){
+        //   console.log(e)
+        console.log(a,e)
+        }
+       }
+   })
+</script>
