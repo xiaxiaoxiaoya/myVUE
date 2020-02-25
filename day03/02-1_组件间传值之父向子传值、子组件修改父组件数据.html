@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .IDCrement{
+        width:100px;
+        height: 100px;
+        background-color: skyblue;
+        color: #fff;
+        font-size:18px;
+        display: block;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+<body>
+    <div id="app">
+        <v-btn :class="IDCrement" :num='num'></v-btn>
+        <v-btn :class="IDCrement" :num='num'></v-btn>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    /*数据是从父组件 流向 子组件
+        1. 在父组件模板中通过 一个标签的自定义属性向子组件传值
+        2. 子组件在自己的配置中 通过props来接收和检验父组件传过来的数据*/
+
+    /*
+        子組件不应该直接修改来自于父组件的数据
+            如果真的没有办法,在子组件一定要修改来自于父组件的数据
+            那子组件必须得转存一份
+    */
+
+    /*
+        子组件接收来至于父组件的数据;接收到父组件的数据后;子组件选择在组件内部重新转存了一份
+        在子组件修改的是转存的那一份数据;这样子组件就不会污染到父组件的数据
+    */
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#app',
+        data: {
+            IDCrement:'IDCrement',
+            num:0
+        },
+        components:{
+            "v-btn":{
+                props:["num"],
+                data (){
+                  return {
+                      artNum:this.num
+                  }
+                },
+                template:`<i @click.prevent="incremnet">{{artNum}}</i>`,
+                
+                methods: {
+                    incremnet(){
+                        this.artNum++
+                    }
+                },
+            }
+        }
+    })
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            在Html5规范中，table只能嵌套tr td标签，ul  li   ——  ol li
+         -->
+         <table>
+             <tr is='v-row'>
+                 <!-- 如果这样写标签，那么会到table外边去，用is方法解决此问题 -->
+                <!-- <v-row></v-row> --> 
+             </tr>
+         </table>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components:{
+            "v-row":{
+                template:'<tr><td>22</td></tr>'
+            }
+        }
+    })
+</script>

@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <style>
-    .pText{
-        background-color:skyblue;
-        color:#fff;
-        padding:6px 12px;
+    .pText {
+        background-color: skyblue;
+        color: #fff;
+        padding: 6px 12px;
         display: inline-block;
     }
-    .pText1{
+
+    .pText1 {
         text-shadow: 2px 2px 3px royalblue;
     }
 </style>
+
 <body>
-   <div id="app">
-       <!-- <p :class='className'>我是样式篇相关指令，用class还是style，你决定叭</p> -->
-       <p :style='style'>我是样式篇相关指令，用class还是style，你决定叭</p>
-       <button @click='btnClick'>点击</button>
-   </div>
+    <div id="app">
+        <!-- <p :class='className'>我是样式篇相关指令，用class还是style，你决定叭</p> -->
+        <p :style='style'>我是样式篇相关指令，用class还是style，你决定叭</p>
+        <button @click='btnClick'>点击</button>
+    </div>
 </body>
+
 </html>
 <script src="./js/vue.js"></script>
 <script type='text/javascript'>
     new Vue({
-        el:'#app',
-        data:{
+        el: '#app',
+        data: {
             //class
                 //字符串形式
                 // className:'pText'
@@ -39,14 +43,20 @@
                 //     pText:true,
                 //     pText1:true
                 // }
-           //style
-                style:{
-                    color:'red'
+            //style
+                //对象形式
+                style: {
+                    "background-color":'red',
                 }
-           
+                //数组形式
+                // style: [
+                //     { "color": 'red' },
+                //     { "background-color": 'yellow' },
+                // ]
+
         },
-        methods:{
-            btnClick(){
+        methods: {
+            btnClick() {
                 console.log('dfsd')
                 this.style = !this.style
             }

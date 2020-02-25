@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-a></v-a>
+        <v-b></v-b>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    /* 
+    非父子传值：总线机制
+     */
+    const a = {
+        template:'<strong @click="handleC">{{msg}}</strong>',
+        data (){
+          return {
+              msg:'我是aaaaaa'
+          }
+        },
+        //第二个
+        methods:{
+            handleC (){
+               this.bus.$emit("changeText",this.msg)
+            }
+        }
+    }
+    const b = {
+        template:'<strong>{{msg}}</strong>',
+        data (){
+          return {
+              msg:'我是bbbbbb'
+          }
+        },
+        mounted (){
+            //第三个
+          this.bus.$on("changeText",(msg)=>{
+              this.msg = msg
+          })
+        }
+    }
+
+    //1、在Vue原型上添加一个总线，即Vue实例
+    Vue.prototype.bus = new Vue();
+    new Vue({
+        el: '#app',
+        components:{
+            "v-a":a,
+            "v-b":b
+        }
+    })
+</script>

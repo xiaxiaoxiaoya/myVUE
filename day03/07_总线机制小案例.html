@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-text title="aa"></v-text>
+        <v-text title="bb"></v-text>
+        <v-text title="cc"></v-text>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vText = {
+        props:["title"],
+        template: '<strong @click="handleC">{{changeTitle}}</strong>',
+        data (){
+          return {
+             changeTitle:this.title
+          }
+        },
+        mounted (){
+            //当3个，v-damu被渲染完时，当前这一段代码 其实已经执行了三次
+            //每一次执行此段代码，都是在bus的change事件绑定回调
+            this.bus.$on("changeText",(title)=>{
+              //输入函数体
+              this.changeTitle=title
+            })
+        },
+        methods:{
+            handleC (){
+              this.bus.$emit('changeText',this.changeTitle)
+            }
+        }
+
+    }
+    Vue.prototype.bus = new Vue();
+    new Vue({
+        el: '#app',
+        data: {
+          
+        },
+        computed: {
+
+
+        },
+        components: {
+            "v-text": vText,
+        }
+
+    })
+</script>

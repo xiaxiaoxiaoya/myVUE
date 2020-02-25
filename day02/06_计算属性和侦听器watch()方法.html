@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div><span>firstName</span> <input type="text" v-model='firstName'></div>
+        <div><span>lastName</span> <input type="text" v-model='lastName'></div>
+        <div><span>fullName</span> <input type="text" v-model='fullName'></div>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+           firstName:'X',
+           lastName:'XXXX',
+           fullName:'X-XXXX'
+       },
+       watch:{
+           firstName (newVal){
+            //  this.fullName = newVal+'-'+this.lastName
+            //使用模板字符串
+            this.fullName = `${newVal}-${this.lastName}`;
+           },
+           lastName (newVal){
+            this.fullName = `${this.firstName}-${newVal}`;
+           }
+       }
+   })
+</script>

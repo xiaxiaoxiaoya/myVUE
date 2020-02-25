@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+//get/set 方法让属性的设置、语法上变的比较复杂
+//get/set 方法让属性变的更安全、更强大
+
+
+//_age_是为了在设置属性时，不出现死循环
+var obj = {
+    get age(){
+        return this._age_
+    },
+    //set()语法会有一个参数val:代表着改完之后的值
+    set age(val){
+        if(val<0) val=0;
+        this._age_ = val;
+    }
+}
+obj.age = -20;
+console.log(obj.age)
+</script>

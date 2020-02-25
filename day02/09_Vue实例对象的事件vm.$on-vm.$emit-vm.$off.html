@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '哈哈哈'
+        }
+    })
+
+    //1、 vm.$on定义vue的自定义事件 参数2个：第一个是自定义事件的名称，第二个是自定义事件的处理程序
+    vm.$on("testEvent", (data) => {
+        //输入函数体
+        console.log("testEvent",data)
+    })
+
+    //2、vm.$emit触发自定义事件  每隔一秒触发一次自定义事件
+    // vm.$emit( 自定义事件的名称，自定义事件处理程序需要的参数1，参数2，参数3)
+    setInterval(() => {
+        //输入函数体
+        vm.$emit("testEvent","触发了testEvent")
+    }, 1000)
+
+    //vm.$once()  监听一个自定义事件，但只触发一次，在第一次触发后移除监听器。
+    vm.$once("testEvent",()=>{
+      //输入函数体
+      console.log('我路过太多太美的奇景')
+    })
+
+    //3、vm.$off  移除自定义事件
+    setTimeout(() => {
+        //输入函数体
+        vm.$off("testEvent")
+    }, 4000)
+</script>

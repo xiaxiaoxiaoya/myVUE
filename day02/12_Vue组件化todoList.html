@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="val">
+        <button @click="addTodo(val)">Add</button>
+        <hr>
+        <todo-list v-bind:List="List"></todo-list>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+//   var todolist = {
+//         props:["List"],
+//         template:`<ul><li v-for="item in List">{{item}}</li></ul>`
+//     }
+   new Vue({
+       el:'#app',
+       data:{
+           List:["张三","李四","王五","夏六"],
+           val:''
+       },
+       methods:{
+           addTodo(){
+               
+            //this.List.unshift(val)
+            //不传val
+            // this.List.unshift(this.val);
+            // this.val=''
+            if(this.val){
+                    this.List.push(this.val)
+                    this.val = ""
+                }
+
+           }
+       },
+       components:{
+            // "todo-list":todolist
+            "todo-list":{
+                props:["List"],//父组件向子组件传递参数
+                template:`<ul><li v-for="item in List">{{item}}</li></ul>`
+            }
+        }
+   })
+</script>

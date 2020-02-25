@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 把字符串传给子组件 -->
+    <ol>
+      <todo-item :sites="sites"></todo-item>
+    </ol>
+    <!-- 把数组的值传给子组件 -->
+    <myname :name="name"></myname>
+  </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+  Vue.component('todo-item', {
+    // props: ['item'],
+    props: ["sites"],
+    template: '<ul><li v-for="val in sites">{{ val.text }}</li></ul>'
+  })
+  Vue.component('myname', {
+    props: ['name'],
+    // props: {
+    // name : Array,
+    // },
+    template: '<div><li v-for="(item,index) in name">{{ item.text }}</li></div>'
+    //需要有一个根元素标签包含子组件循环，vue react都要把东西变成一个块才能循环出来
+  })
+  new Vue({
+    el: '#app',
+    data: {
+      sites: [
+        { text: 'jb51' },
+        { text: 'Google' },
+        { text: 'Taobao' }
+      ],
+      name: [
+        { text: 'lee' },
+        { text: 'jane' },
+        { text: 'nike' }
+      ]
+    }
+  })
+</script>

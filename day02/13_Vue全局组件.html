@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-damu></v-damu>  {{msg}}
+    </div>
+    
+      
+    
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    /* 
+    Vue.component("v-damu", obj)obj中首先，定义定义一个模板，然后定义一个函数返回一个对象
+    定义全局组件：1、需要使用template来定义模板；2、需要定义一个data函数来返回一个对象。因为在子组件中不能使用直接el配置，也不能直接使用data作为对象
+     */
+    var vm = Vue.component("v-damu", {
+        template: "<div>{{msg}}<p v-html='text'></p></div>",
+        data() {
+            return {
+                msg: '我是子组件定义的函数返回的对象噻',
+                text: '<span style="color:red">哈哈<span>'
+            }
+        }
+    })
+    new Vue({
+        name:'kfljdsf',
+        el: '#app',
+        data: {
+            msg:'我是根组件'
+        }
+    })
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(val,key,index) in obj">{{index}}——{{key}}——{{val}} <button @click='update(index)'>update</button></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+   new Vue({
+       el:'#app',
+       data:{
+           obj:{
+               "name":'夏小夏',
+               "age":18
+           }
+       },
+       methods: {
+           update (index){
+            // if(index===0)  this.obj.name='我是改改';
+            // if(index===1) this.obj.age = 16
+
+            //这样的话，数据是加进来了，但是界面没有渲染，因此，要么在data中定义好此属性，要么使用Vue.set(object,key,value)方法或者vm.$set(obj,key,value)方法
+            // this.obj.hobby="吃"
+
+            //Vue.set(object,key,value)方法
+            Vue.set(this.obj,'hobby','吃');
+            //vm.$set(object,key,value)方法
+            this.$set(this.obj,'hobby','吃')
+            //删除一个对象中的某一个属性
+            this.$delete(this.obj,'name')
+
+           }
+       },
+   })
+</script>

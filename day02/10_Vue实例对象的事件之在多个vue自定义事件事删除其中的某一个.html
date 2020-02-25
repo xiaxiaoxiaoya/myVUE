@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '我是只化身孤岛的蓝鲸'
+        }
+    })
+    vm.$on("testEvent",()=> console.log('有着最巨大的身影'));
+    vm.$on("testEvent",()=> console.log('鱼虾在身侧穿行'));
+    vm.$on("testEvent",()=> console.log('也有飞鸟在背上停'));
+    vm.$on("testEvent",()=> console.log('我路过太多太美的奇景'));
+
+    function delEvent(){console.log("你的衣衫破旧,这句要删除")}
+    vm.$on("testEvent",delEvent);
+    setInterval(() => {
+        vm.$emit('testEvent')
+    }, 3000);
+    setTimeout(() => {
+        vm.$off("testEvent",delEvent)
+    }, 4000);
+</script>

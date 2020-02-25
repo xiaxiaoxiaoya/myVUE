@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .circle{
+        width:100px;
+        height: 100px;
+        background-color: skyblue;
+        color: #fff;
+        font-size:18px;
+        display: block;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+<body>
+    <div id="app">
+        <v-btn :class="className" :msg='msg'></v-btn>
+        <v-btn :class="className" :msg='msg'></v-btn>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#app',
+        data: {
+            className:'circle',
+            msg:'0'
+        },
+        components:{
+            "v-btn":{
+                props:["msg"],
+                template:`<i >{{msg}}</i>`
+            }
+        }
+    })
+</script>

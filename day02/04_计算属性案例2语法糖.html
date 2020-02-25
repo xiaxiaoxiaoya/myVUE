@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div><span>firstName</span> <input type="text" v-model='firstName'></div>
+        <div><span>lastName</span> <input type="text" v-model='lastName'></div>
+        <div><span>fullName</span> <input type="text" v-model='fullName'></div>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    new Vue({
+        el: '#app',
+        data: {
+            firstName: 'X',
+            lastName: 'ruifang',
+        },
+        computed: {
+            //计算属性语法糖式的写法
+            /* fullName (){
+             console.log("computed")
+              return this.firstName+'-'+ this.lastName;
+            } */
+
+            //计算属性的get()/set()语法
+            fullName:{
+               get (){
+                console.log("computed")
+                return this.firstName + '-' + this.lastName;
+               },
+               //set()语法会有一个参数val:代表着改完之后的值
+               set (val){
+                 console.log(val)
+                 let arr = val.split('-');
+                 this.firstName=arr[0];
+                 this.lastName=arr[1]
+               }
+            }
+        },
+    })
+</script>

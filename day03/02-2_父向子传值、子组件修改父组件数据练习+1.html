@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .btn {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: skyblue;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <v-text :msg="msg"></v-text>
+    </div>
+
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    /* 
+    如果子组件想要修改父组件的数据的话， 不能直接修改，这样会造成数据污染；那么怎么改呐？
+    需要在子组件中转存一份父组件的数据，在子组件中修改转存的那一份数据即可
+     */
+    Vue.config.productionTip = false;
+    const vText = {
+        props: ['msg'],
+        template: `<strong :class='btn' @click='handleC'>父传子：{{modifyMSg}}</strong>`,
+        data() {
+            return {
+                btn: 'btn',
+                modifyMSg:this.msg
+            }
+
+        },
+        methods:{
+            handleC (){
+              this.modifyMSg = '我修改了父组件的内容，但我修改的是子组件转存的数据哦'
+            }
+        }
+    };
+
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '我是父组件的内容'
+        },
+        components: {
+            "v-text": vText
+        }
+
+
+    })
+</script>

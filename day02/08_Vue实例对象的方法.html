@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="background-color: red;height:50px" id="app">
+
+    </div>
+    <div id="lala"></div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    /* 
+    一、vm.$mount()：
+        配置对象el作用：
+        1、确定Vue根组件挂载到哪个DOM元素节点下；如果Vue实例中没有写el,可通过vm.$mount()手动挂载一个未挂载的实例。
+        2、确定了根组件的模版；可通过template配置对象设置指定模板。
+     */
+    var vm = new Vue({
+        // el: '#app',
+        name:'瞪瞪',
+        template:"<span>{{msg}}</span>",//确定根组件的模板
+        data: {
+            msg: '最亲的人在身边，最爱的人在对面',
+            obj:{
+                name:'xixi',
+                age:24
+            }
+        }
+    })
+    vm.$mount("#lala")//设置根组件挂载到哪个节点下
+
+    //下边是Vue实例的对象的属性
+    console.log(vm.$el)
+    console.log(vm.$options.name)
+
+    
+
+</script>

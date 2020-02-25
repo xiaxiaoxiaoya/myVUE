@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            在组件上使用@符号，相当于给当前这个组件自定义一个vue事件;
+            @frendClick="handleC"相当于v-btn.$on("frendClick",handleC),事件名不能出现英文大写
+         -->
+        <v-btn @fclick="handleC"></v-btn>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods:{
+            handleC (){
+              console.log("我是父组件通过子组件监听子组件触发的事件")
+            }
+        },
+        components:{
+            "v-btn":{
+                 /* 
+                执行过程：首先执行html标签button上的点击事件(@click="handleC")，这个触发的就是这个普通的DOM点击事件，直接走v-btn组件中的handleC(方法)；
+                接着触发了this.$emit("click1")，click1是组件注册的自定义事件，这里的的this,是v-btn组件，而每个组件都是一个vue实例，
+                所以又指向了根组件中methods配置对象中的handleC()方法。
+                这一行为意思是：父组件可以使用子组件的地方直接调用v-on来监听子组件触发的事件。
+
+                 */
+                template:`<button @click="handleC">click</button>`,
+                methods:{
+                    handleC (){
+                    //   console.log("我是点击buttonDOM元素打印的数据哦~")
+                      this.$emit("fclick")
+                    }
+                }
+            }
+        }
+    })
+</script>

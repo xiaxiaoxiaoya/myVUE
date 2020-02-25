@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+           1、key值和v-if配合使用：可实现两个input是完全独立个体。
+           在第一个input输入一些内容， 在控制台，输入vm.flag = false，可测试，两个div是不是完全独立的。加入key值可实现两个input是完全独立的。
+         -->
+        <div v-if='flag'>a: <input type="text" key='a'></div>
+        <div v-if='!flag'>b: <input type="text" key='b'></div>
+
+         <br>
+        <hr>
+        <!-- 
+            2、key值和v-for配合使用：将index交给VUE来管理，可以提高界面渲染速度。
+            只需要记住，以后使用循环，在循环体上加一个——:key='index'即可。
+         -->
+         <ul>
+             <li v-for='(val,index) in list' :key='index'>{{val}}</li>
+         </ul>
+
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+let vm =   new Vue({
+       el:'#app',
+       data:{
+           flag:true,
+           list:['哈哈','嘻嘻','嘿嘿','呵呵','啦啦']
+       }
+   })
+</script>

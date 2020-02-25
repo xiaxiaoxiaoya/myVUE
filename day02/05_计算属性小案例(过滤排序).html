@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    span {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='searchVal'>
+        <ul>
+            <li v-for='(val,index) in searchList' :key='index'>
+                <span>{{val.name}}</span>————
+                <span>{{val.age}}</span>————
+                <span>{{val.hobby}}</span>
+            </li>
+        </ul>
+        <button @click='sheng'>按年龄升序</button>
+        <button @click='jiang'>按年龄降序</button>
+        <button @click='yuan'>按年龄的本来顺序</button>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    new Vue({
+        el: '#app',
+        data: {
+            searchVal: '',
+            sortType: 0,
+            list: [
+                { "name": "xiaxia", "age": 16, "hobby": '吃' },
+                { "name": "hhhhh", "age": 13, "hobby": '喝' },
+                { "name": "lllll", "age": 12, "hobby": '玩' },
+                { "name": "xyyyy", "age": 12, "hobby": '玩' },
+                { "name": "cdddd", "age": 12, "hobby": '玩' },
+                { "name": "wwwww", "age": 19, "hobby": '乐' },
+                { "name": "ccccc", "age": 14, "hobby": '睡' },
+            ]
+
+        },
+        methods: {
+            sheng() {
+                this.sortType = 1
+            },
+            jiang() {
+                this.sortType = -1
+            },
+            yuan() {
+                this.sortType = 0
+            }
+        },
+        computed: {
+            searchList() {
+                var filterArr = this.list.filter((val, index, arr) => {
+                    //输入函数体
+                    return val.name.includes(this.searchVal)
+
+                });
+                switch (this.sortType) {
+                    case 0:
+
+                        break;
+                    case 1:
+                        filterArr.sort((a, b) => {
+                            //a,b是数组中的第一项和第二项
+                            return a.age - b.age//升序
+                            //输入函数体
+                        })
+                        break;
+                    case -1:
+                        filterArr.sort((a, b) => {
+                            //a,b是数组中的第一项和第二项
+                            return b.age - a.age//降序
+                            //输入函数体
+                        })
+                        break;
+                }
+                return filterArr
+
+            }
+        }
+    })
+</script>

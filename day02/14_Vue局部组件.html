@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <v-damu></v-damu>
+    </div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#app',
+        data: {
+            msg:"我是根组件的msg信息"
+        },
+        components: {
+            "v-damu": {
+                template: '<div>我是局部组件{{msg}}</div>',
+                //为什么非根组件中data需要定义一个函数，为了数据的隔离。
+                data() {
+                    return {
+                        msg: '我是局部组件的msg信息'
+                    }
+                }
+            }
+
+        }
+    })
+</script>
