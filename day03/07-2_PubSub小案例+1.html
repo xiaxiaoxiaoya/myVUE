@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 这是个非特性的props -->
+        <v-text title='aa'></v-text>
+        <v-text title='bb'></v-text>
+        <v-text title='cc'></v-text>
+    </div>
+    <template id="vBox">
+        <div @click='handleC'>
+            {{myTitle}}
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.min.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vText = {
+        props:['title'],
+        template:'#vBox',
+        data (){
+          return {
+              myTitle:this.title
+          }
+        },
+        mounted (){//订阅者
+        //   this.bus.$on('changeText',(title)=>{
+        //     //输入函数体
+        //     this.myTitle = title
+        //   })
+        PubSub.subscribe('changeText',(name,title)=>{
+          //输入函数体
+          this.myTitle = title
+        })
+        },
+        methods:{
+            handleC (){//发布
+            //   this.bus.$emit('changeText',this.myTitle)
+            PubSub.publish('changeText',this.myTitle)
+            }
+        }
+
+    }
+
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components:{
+            "v-text":vText
+        }
+    })
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    img {
+        width: 100px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <my-content :list='list'></my-content>
+    </div>
+    <template id='templateBox'>
+        <ul>
+            <li v-for="item in list">
+                <h4>{{item.title}}</h4>
+                <img v-bind:src='item.img' />
+            </li>
+        </ul>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    //第一种方法：数据
+    // const myContent = {
+    //     props: ['list'],
+    //     //img这块儿v-bind这样的管就让一个非vue指令的标签属性，交给vue管理，就可以使用vue实例对象中的data中的一个值;插值是用在标签当中的,而v-bind是用在标签属性中的。
+    //     template: "#templateBox",
+    // }
+
+
+    //第二种方法：对象 key(自定义属性名)和value(数据类型)
+
+    // const myContent = {
+    //     props: {
+    //         list:Array
+    //     },
+    //     template: "#templateBox",
+    // }
+
+    //第三种：key的值为自定义属性名，value值为一个对象，这个对象的key值分别为type和defalut，表示数据类型，
+    //和默认值，如果数据类型为数组或对象，默认值必须写为函数，其余直接赋值。
+    const myContent = {
+        template: "#templateBox",
+        props: {
+            list: {
+                type: Array,
+                default: function () {
+                    console.log('我是哈哈哈')
+                }
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            list: [{
+                img: 'https://img12.360buyimg.com/n7/jfs/t1/59022/28/10293/141808/5d78088fEf6e7862d/68836f52ffaaad96.jpg',
+                title: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待'
+            }, {
+                img: 'https://m.360buyimg.com/mobilecms/s750x750_jfs/t23386/9/1066712099/277967/615ccafb/5b4f0e3aN262237fc.jpg!q80.dpg.webp',
+                title: '【官方AppleCare+版】Apple MacBook Pro 15.4英寸笔记本电脑 深空灰色 配备Touch Bar 2018新款(八代i5/16G)'
+            }, {
+                img: 'https://img13.360buyimg.com/n7/jfs/t1/51521/12/10437/169738/5d780c40Eda0f0e1d/ccbc7745b343f87d.jpg',
+                title: 'Apple iPhone 11 Pro Max (A2220) 256GB 暗夜绿色 移动联通电信4G手机 双卡双待'
+            }, {
+                img: 'https://img11.360buyimg.com/n7/jfs/t1/53688/36/14138/113224/5db03763Ee6d8b784/5f5a3f4ce7490d36.jpg',
+                title: '【超级爆品】一加 OnePlus 7 Pro 2K+90Hz 流体屏 骁龙855旗舰 4800'
+            }]
+        },
+        components: {
+            'my-content': myContent
+        }
+
+    })
+</script>

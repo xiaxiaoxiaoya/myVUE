@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pink {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background: pink;
+        line-height: 100px;
+        text-align: center;
+        border-radius: 50%;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <v-num class="pink" :num='num'></v-num>
+        <v-num class="pink" :num='num'></v-num>
+    </div>
+    <template id="templateBox">
+        <div @click="handleC">{{myNum}}</div>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vNum = {
+        //1、props为数组
+        // props:['num'],
+        //2、props为对象
+        // props:{
+        //     num:['Number','Boolean'],
+        // },
+
+        //3、props为对象——自定义校验
+        props: {
+            num:{
+                type:Number,//如果tpe为数组或对象，那么默认值必须写为函数，其余直接赋值
+                required:true, //required不能和dfalult同时存在
+                // default:function(){
+                //     return 0000
+                // },
+                //自定义校验
+                validator:function(val){
+                    return val>10;//如果val_num的值小于10则会警告
+                }
+            }
+        },
+        template: '#templateBox',
+        data() {
+            return {
+                myNum: this.num,
+            }
+        },
+        methods: {
+            handleC() {
+                // console.log(this.myNum)
+                this.myNum++
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            num: 11,
+        },
+        components: {
+            "v-num": vNum
+        }
+
+    })
+</script>

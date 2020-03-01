@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    普通插槽是父给子传数据，传的是html片段数据。
+ -->
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <slot-test>
+            <h4 slot="xia">我是xia</h4>
+            <h4 slot="li">我是li</h4>
+        </slot-test>
+    </div>
+   <template id="test">
+       <div>
+           {{msg}}
+           <slot name="xia">夏</slot>
+           <slot name="li">李</slot>
+          
+       </div>
+   </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    var SlotTest = {
+        template:"#test",
+        data (){
+          return {
+            msg:'我是子组件',
+            
+          }
+        }
+    }
+    new Vue({
+        el: '#app',
+        data:{
+            msg:'我是根组件'
+        },
+        components: {
+            SlotTest
+        }
+    })
+</script>

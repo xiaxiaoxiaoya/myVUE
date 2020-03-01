@@ -26,48 +26,42 @@
 
 </html>
 <script src="./js/vue.js"></script>
-<!-- 引入pubsub.min.js 处理子组件之间传数据 -->
-<script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.min.js"></script>
 <script type='text/javascript'>
     Vue.config.productionTip = false;
     const va = {
         template: '#va',
-        data() {
+        data (){
             return {
-                msg: '我是aaaaaa'
+                msg:'我是aaaaaa'
             }
         },
-        methods: {
-            handleC() {
-                //this:a组件的vue实例
-                //   this.bus.$emit('changeText',this.msg)
-                PubSub.publish('changeText', this.msg)
+        methods:{
+            handleC (){
+                 //this:a组件的vue实例
+              this.bus.$emit('changeText',this.msg)
             }
         }
 
     };
     const vb = {
         template: '#vb',
-        data() {
-            return {
-                msg: '我是bbbbb'
-            }
+        data (){
+          return {
+            msg:'我是bbbbb'
+          }
         },
-        mounted() {
+        mounted (){
             //this:b组件的vue实例
-            //   this.bus.$on('changeText',(msg)=>{
-            //     //输入函数体
-            //      //this:b组件的vue实例
-            //     this.msg=msg
-            //   })
-            PubSub.subscribe("changeText", (name, msg) => {
-                this.msg = msg;
-            })
+          this.bus.$on('changeText',(msg)=>{
+            //输入函数体
+             //this:b组件的vue实例
+            this.msg=msg
+          })
         }
 
     }
     //通过总线机制
-    Vue.prototype.bus = new Vue();
+    Vue.prototype.bus=new Vue();
     new Vue({
         el: '#app',
         components: {

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    作用域插槽：是子组件给父组件提供数据。
+     -->
+
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <hr>
+        <v-slot>
+            <!-- <template slot-scope="obj">
+                <div>
+                    <span>{{obj}}</span>
+                    <span>{{obj.data}}</span>
+                    <span>{{obj.data2}}</span>
+                    <h4 slot="=color">我是父组件给子组件传的内容</h4>
+                </div>
+            </template> -->
+            <template v-slot='{msg}'>
+                <!-- {{msg}} -->
+                <li>{{msg.msg.name}}：{{msg.msg.age}}</li>
+            </template>
+
+        </v-slot>
+    </div>
+    <template id="test">
+        <div>
+            <!-- {{msg}} -->
+            <!-- <slot data='这是子组件的数据' data2='data2'></slot> -->
+            <!-- <slot name='color'></slot> -->
+            <ul>
+                <slot v-for="item in childMsg" :msg="item"></slot>
+            </ul>
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    var vSlot = {
+        template: "#test",
+        data() {
+            return {
+                // msg: '我是子组件',
+                childMsg: [
+                    {
+                        name: "张三",
+                        age: 18
+                    },
+                    {
+                        name: "李四",
+                        age: 19
+                    }
+                ]
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '我是根组件'
+        },
+        components: {
+            vSlot
+        }
+    })
+</script>

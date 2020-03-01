@@ -9,18 +9,23 @@
 
 <body>
     <div id="app">
-
+        {{date | filterDate}}
     </div>
 </body>
 
 </html>
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
 <script src="./js/vue.js"></script>
 <script type='text/javascript'>
-    Vue.config.productionTip = false
+    Vue.config.productionTip = false;
+    Vue.filter('filterDate',function(value){
+        //可以做很多复杂的格式化处理
+        return moment(value).format("YYYY-MM-DD HH:mm:ss")
+    })
     new Vue({
         el: '#app',
         data: {
-
+            date:new Date()
         },
         computed: {
         

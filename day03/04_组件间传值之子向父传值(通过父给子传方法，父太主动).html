@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pink{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background: pink;
+        line-height: 100px;
+        text-align: center;
+        border-radius: 50%;
+    }
+</style>
+<body>
+    <div id="app">
+        <v-circle :num='num' :add='add' class="pink"></v-circle>
+        <v-circle :num='num' :add='add' class="pink"></v-circle>
+        <i class="pink" style="background-color: yellowgreen;">{{appNum}}</i>
+    </div>
+    <template id="templateBox">
+        <div @click="handleC">{{myNum}}</div>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    /* 
+    子向父传递数据方法一：
+    父组件通过一个标签属性向子组件传递一个方法，子组件通过props接收并检验这个方法，
+    子组件在自身内部调用父组件传过来的方法，并且通过该方法的形参向父组件传递数据。
+    */
+    Vue.config.productionTip = false;
+    const vCircle = {
+        template:'#templateBox',
+        props:{
+            num:Number,
+            add:Function
+        },
+        data (){
+          return {
+              myNum:this.num,
+              step:1
+          }
+        },
+        methods:{
+            handleC (){
+              this.myNum++;
+              this.add(this.step)//子组件在自身内部调用父组件传过来的方法，并传递形参向父组件传递数据
+            }
+        }
+
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            num:0,
+            appNum:0
+        },
+        methods:{
+            add(step){
+                this.appNum+=step;
+            }
+        },
+        components:{
+            "v-circle":vCircle
+        }
+    })
+</script>

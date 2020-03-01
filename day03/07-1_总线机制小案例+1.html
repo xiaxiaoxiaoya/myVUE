@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 这是个非特性的props -->
+        <v-text title='aa'></v-text>
+        <v-text title='bb'></v-text>
+        <v-text title='cc'></v-text>
+    </div>
+    <template id="vBox">
+        <div @click='handleC'>
+            {{myTitle}}
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vText = {
+        props:['title'],
+        template:'#vBox',
+        data (){
+          return {
+              myTitle:this.title
+          }
+        },
+        mounted (){
+          this.bus.$on('changeText',(title)=>{
+            //输入函数体
+            this.myTitle = title
+          })
+        },
+        methods:{
+            handleC (){
+              this.bus.$emit('changeText',this.myTitle)
+            }
+        }
+
+    }
+    Vue.prototype.bus = new Vue();
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components:{
+            "v-text":vText
+        }
+    })
+</script>
